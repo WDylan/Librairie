@@ -28,10 +28,10 @@ export class FormulaireModifBookComponent {
     private authorService: AuthorService
   ) {
     this.book = this.formBuilder.group({
-      title: ['', Validators.required],
-      coverText: ['', Validators.required],
-      idAuthor: ['', Validators.required],
-      comment: ['']
+      title: ['', [Validators.required]],
+      coverText: ['', [Validators.required]],
+      idAuthor: ['', [Validators.required]],
+      comment: ['', [Validators.required]]
     });
   }
 

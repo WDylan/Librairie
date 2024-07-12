@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { BookService } from '../../services/book.service';
+import Author from '../../models/author.model';
+import { AuthorService } from '../../services/author.service';
 
 @Component({
   selector: 'app-formulaire-ajout-book',
@@ -14,13 +16,25 @@ import { BookService } from '../../services/book.service';
 export class FormulaireAjoutBookComponent {
   book: FormGroup;
   submitted: boolean = false;
+  authors: Author[] = [];
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private bookService: BookService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private bookService: BookService,
+    private authorService: AuthorService
+  ) {
     this.book = this.formBuilder.group({
       title: ['', [Validators.required]],
       coverText: ['', [Validators.required]],
       idAuthor: ['', [Validators.required]],
       comment: ['', [Validators.required]],
+    });
+  }
+
+  ngOnInit(): void {
+    this.authorService.getAuthors().subscribe((data: Author[]) => {
+      this.authors = data;
     });
   }
 
