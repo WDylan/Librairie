@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
 import Book from '../../models/book.model';
+import Author from '../../models/author.model';
+import { AuthorService } from '../../services/author.service';
 
 @Component({
   selector: 'app-formulaire-modif-book',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './formulaire-modif-book.component.html',
   styleUrl: './formulaire-modif-book.component.css'
 })
@@ -16,12 +18,14 @@ export class FormulaireModifBookComponent {
   book: FormGroup;
   submitted: boolean = false;
   bookId?: number;
+  authors: Author[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private bookService: BookService
+    private bookService: BookService,
+    private authorService: AuthorService
   ) {
     this.book = this.formBuilder.group({
       title: ['', Validators.required],
@@ -39,6 +43,10 @@ export class FormulaireModifBookComponent {
         this.book.patchValue(bookData);
       });
     }
+
+    this.authorService.getAuthors().subscribe((data: Author[]) => {
+      this.authors = data;
+    });
   }
 
   onSubmit(): void {

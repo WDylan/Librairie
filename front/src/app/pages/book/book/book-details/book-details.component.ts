@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import Book from '../../../../models/book.model';
 import { BookService } from '../../../../services/book.service';
@@ -6,7 +6,7 @@ import { BookService } from '../../../../services/book.service';
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css'
 })

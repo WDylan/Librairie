@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import Author from '../../../models/author.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthorService } from '../../../services/author.service';
 
 @Component({
   selector: 'app-author-details',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './author-details.component.html',
   styleUrl: './author-details.component.css'
 })

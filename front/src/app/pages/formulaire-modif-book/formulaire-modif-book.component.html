@@ -18,8 +18,12 @@
     />
   </div>
   <div class="form-group">
-    <label for="idAuthor">Id de l'auteur</label>
-    <input class="form-control" id="idAuthor" formControlName="idAuthor" />
+    <label for="idAuthor">Auteur</label>
+    <select class="form-control" id="idAuthor" formControlName="idAuthor">
+      <option *ngFor="let author of authors" [value]="author.id">
+        {{ author.firstName }} {{ author.lastName }}
+      </option>
+    </select>
   </div>
   <div class="form-group">
     <label for="comment">Commentaire du bibliothécaire</label>
@@ -30,4 +34,5 @@
     ></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Modifier</button>
+  <a routerLink="/books" class="btn btn-secondary">Retour</a>
 </form>
