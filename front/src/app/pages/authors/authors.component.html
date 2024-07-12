@@ -1,0 +1,10 @@
+<h2>Liste des Auteurs</h2>
+<div>
+  <app-author-list [authors]="authors"></app-author-list>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{currentPage}} of {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>
+

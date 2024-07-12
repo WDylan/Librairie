@@ -1,0 +1,15 @@
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <h2>Livre n°{{ book.id }}</h2>
+    <h3 class="card-title">{{ book.title }}</h3>
+    <p class="card-text">
+      <span class="bold">Quatrième de couverture :</span> {{ book.coverText }}
+    </p>
+    <a routerLink="/books/{{ book.id }}" class="btn btn-primary"
+      >Voir le livre</a
+    >
+    <a routerLink="/books/{{ book.id }}/edit" class="btn btn-success"
+      >Modifier</a
+    >
+  </div>
+</div>

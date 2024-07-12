@@ -1,0 +1,20 @@
+<p><span class="fw-bold">Id : </span>{{ book?.id }}</p>
+<p><span class="fw-bold">Titre : </span>{{ book?.title }}</p>
+<p>
+  <span class="fw-bold">Quatrième de couverture : </span>{{ book?.coverText }}
+</p>
+<p><span class="fw-bold">Id de l'auteur : </span>{{ book?.author?.id }}</p>
+<p>
+  <span class="fw-bold">Nom de l'auteur : </span>{{ book?.author?.lastName }}
+</p>
+<p>
+  <span class="fw-bold">Prénom de l'auteur : </span
+  >{{ book?.author?.firstName }}
+</p>
+<p>
+  <span class="fw-bold">Commentaire du libraire : </span>{{ book?.comment }}
+</p>
+
+<button (click)="confirmDelete()" class="btn btn-danger">
+  Supprimer le livre
+</button>

@@ -1,0 +1,33 @@
+<form [formGroup]="book" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Titre</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      formControlName="title"
+    />
+  </div>
+  <div class="form-group">
+    <label for="coverText">Quatrième de couverture</label>
+    <input
+      type="text"
+      class="form-control"
+      id="coverText"
+      formControlName="coverText"
+    />
+  </div>
+  <div class="form-group">
+    <label for="idAuthor">Id de l'auteur</label>
+    <input class="form-control" id="idAuthor" formControlName="idAuthor" />
+  </div>
+  <div class="form-group">
+    <label for="comment">Commentaire du bibliothécaire</label>
+    <textarea
+      class="form-control"
+      id="comment"
+      formControlName="comment"
+    ></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>

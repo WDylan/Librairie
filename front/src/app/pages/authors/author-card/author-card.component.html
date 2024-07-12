@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <h2>Auteur n°{{ author.id }}</h2>
+    <p class="card-text"><span class="bold">Nom : </span>{{ author.lastName }}</p>
+    <p class="card-text"><span class="bold">Prénom : </span>{{ author.firstName }}</p>
+    <a routerLink="/authors/{{ author.id }}" class="btn btn-primary"
+    >Voir l'auteur</a
+  >
+  <a routerLink="/authors/{{ author.id }}/edit" class="btn btn-success"
+  >Modifier</a
+>
+  </div>
+</div>
