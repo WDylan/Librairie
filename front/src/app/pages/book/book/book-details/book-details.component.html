@@ -15,7 +15,7 @@
   <span class="fw-bold">Commentaire du libraire : </span>{{ book?.comment }}
 </p>
 
-<button (click)="confirmDelete()" class="btn btn-danger">
+<button *ngIf="role === 'ROLE_ADMIN'" (click)="confirmDelete()" class="btn btn-danger">
   Supprimer le livre
 </button>
 <a routerLink="/books" class="btn btn-secondary">Retour</a>

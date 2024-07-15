@@ -92,6 +92,7 @@ class BookController extends AbstractController
      */
     // Définition d'une route pour supprimer un livre spécifique par son ID. La méthode HTTP autorisée est DELETE.
     #[Route('/api/books/{id}', name: 'deleteBook', methods: ['DELETE'])]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\avez pas les droits suffisants pour supprimer un livre.')]
     #[OA\Tag(name: "Books")]
     public function deleteBook(Book $book, EntityManagerInterface $em, TagAwareCacheInterface $cachePool): JsonResponse
     {
@@ -140,6 +141,7 @@ class BookController extends AbstractController
             )
         ]
     )]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\avez pas les droits suffisants pour créer un livre.')]
     #[OA\Tag(name: "Books")]
     public function createBook(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator, AuthorRepository $authorRepository, ValidatorInterface $validator, TagAwareCacheInterface $cachePool): JsonResponse
     {
@@ -230,6 +232,7 @@ class BookController extends AbstractController
             )
         ]
     )]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\avez pas les droits suffisants pour modifier un livre.')]
     #[OA\Tag(name: "Books")]
     public function updateBook(Request $request, SerializerInterface $serializer, Book $currentBook, EntityManagerInterface $em, AuthorRepository $authorRepository, ValidatorInterface $validator, TagAwareCacheInterface $cache): JsonResponse
     {

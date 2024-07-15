@@ -11,10 +11,15 @@ import { FormulaireAjoutAuthorComponent } from './pages/formulaire-ajout-author/
 import { FormulaireModifAuthorComponent } from './pages/formulaire-modif-author/formulaire-modif-author.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
 
+  { path: 'register', component: RegisterComponent },
+
   { path: 'login', component: LoginComponent },
+
+  { path: 'logout', component: LoginComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 

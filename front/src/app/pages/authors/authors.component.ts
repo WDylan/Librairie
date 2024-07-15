@@ -17,7 +17,6 @@ export class AuthorsComponent {
   totalPages : number = 0;
   limit: number = 12;
 
-
   constructor(
     private authorService: AuthorService
   ) { }
@@ -46,6 +45,5 @@ export class AuthorsComponent {
       this.loadAuthors();
     }
   }
-
 
 }

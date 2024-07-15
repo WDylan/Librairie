@@ -88,6 +88,7 @@ class AuthorController extends AbstractController
      */
     // Définition d'une route pour supprimer un auteur spécifique via une requête DELETE.
     #[Route('/api/authors/{id}', name: 'deleteAuthor', methods: ['DELETE'])]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\avez pas les droits suffisants pour supprimer un Auteur.')]
     #[OA\Tag(name: "Authors")]
     public function deleteAuthor(Author $author, EntityManagerInterface $em, BookRepository $bookRepository, TagAwareCacheInterface $cachePool): JsonResponse
     {
@@ -141,6 +142,7 @@ class AuthorController extends AbstractController
             )
         ]
     )]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\avez pas les droits suffisants pour créer un Auteur.')]
     #[OA\Tag(name: "Authors")]
     public function createAuthor(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator, ValidatorInterface $validator, TagAwareCacheInterface $cachePool): JsonResponse
     {
@@ -213,6 +215,7 @@ class AuthorController extends AbstractController
             )
         ]
     )]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\avez pas les droits suffisants pour modifier un Auteur.')]
     #[OA\Tag(name: "Authors")]
     public function updateAuthor(Request $request, SerializerInterface $serializer, Author $currentAuthor, EntityManagerInterface $em, ValidatorInterface $validator, TagAwareCacheInterface $cachePool): JsonResponse
     {

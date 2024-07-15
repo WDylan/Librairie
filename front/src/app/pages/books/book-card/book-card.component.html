@@ -8,7 +8,10 @@
     <a routerLink="/books/{{ book.id }}" class="btn btn-primary"
       >Voir le livre</a
     >
-    <a routerLink="/books/{{ book.id }}/edit" class="btn btn-success"
+    <a
+      *ngIf="role === 'ROLE_ADMIN'"
+      routerLink="/books/{{ book.id }}/edit"
+      class="btn btn-success"
       >Modifier</a
     >
   </div>

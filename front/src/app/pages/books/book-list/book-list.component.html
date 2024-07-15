@@ -1,9 +1,14 @@
-<a routerLink="/newBook" class="btn btn-warning">Ajouter un nouveau Livre</a>
+<a
+  *ngIf="role === 'ROLE_ADMIN'"
+  routerLink="/newBook"
+  class="btn btn-warning"
+  >Ajouter un nouveau Livre</a
+>
 
 <div class="row g-1">
   @for (item of books; track $index) {
   <div class="col-md-4 d-flex justify-content-center">
-    <app-book-card [book]="item"/>
+    <app-book-card [book]="item" />
   </div>
   }
 </div>
