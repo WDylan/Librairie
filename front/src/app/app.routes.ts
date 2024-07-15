@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './commons/not-found/not-found.component';
 import { BooksComponent } from './pages/books/books.component';
@@ -9,8 +9,12 @@ import { FormulaireAjoutBookComponent } from './pages/formulaire-ajout-book/form
 import { FormulaireModifBookComponent } from './pages/formulaire-modif-book/formulaire-modif-book.component';
 import { FormulaireAjoutAuthorComponent } from './pages/formulaire-ajout-author/formulaire-ajout-author.component';
 import { FormulaireModifAuthorComponent } from './pages/formulaire-modif-author/formulaire-modif-author.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
+
+  { path: 'login', component: LoginComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
@@ -20,7 +24,7 @@ export const routes: Routes = [
 
   { path: 'books/:id', component: BookComponent },
 
-  { path: 'books/:id/edit', component: FormulaireModifBookComponent},
+  { path: 'books/:id/edit', component: FormulaireModifBookComponent },
 
   { path: 'newBook', component: FormulaireAjoutBookComponent },
 
@@ -28,9 +32,15 @@ export const routes: Routes = [
 
   { path: 'authors/:id', component: AuthorComponent },
 
-  { path: 'authors/:id/edit', component: FormulaireModifAuthorComponent},
+  { path: 'authors/:id/edit', component: FormulaireModifAuthorComponent },
 
   { path: 'newAuthor', component: FormulaireAjoutAuthorComponent },
 
   { path: '**', component: NotFoundComponent },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
