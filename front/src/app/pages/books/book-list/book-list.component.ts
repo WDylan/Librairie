@@ -12,13 +12,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './book-list.component.css'
 })
 export class BookListComponent {
-  @Input() books: any[] = [];
+  @Input() books: any[] = []; // Propriété d'entrée pour recevoir la liste des livres
 
-  role: string | null = null;
+  role: string | null = null; // Propriété pour stocker le rôle de l'utilisateur
 
+  // Constructeur du composant, injecte UserService
   constructor(private userService: UserService) { }
 
+  // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
+    // Récupère le rôle de l'utilisateur depuis le UserService
     this.role = this.userService.getRole();
   }
 }

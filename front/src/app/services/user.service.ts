@@ -70,18 +70,18 @@ export class UserService {
     return this.httpClient.delete<User>(`${this.apiUrl}/users/${id}`); // Effectue une requête DELETE pour supprimer un utilisateur
   }
 
-  // Nouvelle méthode pour obtenir le rôle de l'utilisateur
+  // Méthode pour obtenir le rôle de l'utilisateur
   getRole(): string | null {
     const token = localStorage.getItem(this.tokenKey);
     if (token) {
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
+        const payload = JSON.parse(atob(token.split('.')[1])); // Décode le payload du token
         return payload.roles ? payload.roles[0] : null; // Retourne le premier rôle trouvé
       } catch (e) {
-        console.error('Invalid token format', e);
+        console.error('Invalid token format', e); // Log une erreur si le format du token est invalide
         return null;
       }
     }
-    return null;
+    return null; // Retourne null si aucun token n'est trouvé
   }
 }

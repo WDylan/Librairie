@@ -12,14 +12,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './author-list.component.css'
 })
 export class AuthorListComponent {
+  @Input() authors: any[] = []; // Propriété d'entrée pour recevoir la liste des auteurs
 
-  @Input() authors: any[] = [];
+  role: string | null = null; // Propriété pour stocker le rôle de l'utilisateur
 
-  role: string | null = null;
-
+  // Constructeur du composant, injecte UserService
   constructor(private userService: UserService) { }
 
+  // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
+    // Récupère le rôle de l'utilisateur depuis le UserService
     this.role = this.userService.getRole();
   }
 }

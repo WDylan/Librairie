@@ -12,13 +12,16 @@ import { UserService } from '../../../services/user.service';
 })
 export class AuthorCardComponent {
 
-  @Input() author!: any;
+  @Input() author!: any; // Propriété d'entrée pour recevoir les détails de l'auteur
 
-  role: string | null = null;
+  role: string | null = null; // Propriété pour stocker le rôle de l'utilisateur
 
+  // Constructeur du composant, injecte UserService
   constructor(private userService: UserService) { }
 
+  // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
+    // Récupère le rôle de l'utilisateur depuis le UserService
     this.role = this.userService.getRole();
   }
 }
