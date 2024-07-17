@@ -12,6 +12,7 @@ import { FormulaireModifAuthorComponent } from './pages/formulaire-modif-author/
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
 
@@ -25,23 +26,23 @@ export const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
 
-  { path: 'books', component: BooksComponent },
+  { path: 'books', component: BooksComponent, canActivate: [AuthGuard] },
 
-  { path: 'books/:id', component: BookComponent },
+  { path: 'books/:id', component: BookComponent, canActivate: [AuthGuard] },
 
-  { path: 'books/:id/edit', component: FormulaireModifBookComponent },
+  { path: 'books/:id/edit', component: FormulaireModifBookComponent, canActivate: [AuthGuard], data: { expectedRole: 'ROLE_ADMIN' } },
 
-  { path: 'newBook', component: FormulaireAjoutBookComponent },
+  { path: 'newBook', component: FormulaireAjoutBookComponent, canActivate: [AuthGuard], data: { expectedRole: "ROLE_ADMIN" } },
 
-  { path: 'authors', component: AuthorsComponent },
+  { path: 'authors', component: AuthorsComponent, canActivate: [AuthGuard] },
 
-  { path: 'authors/:id', component: AuthorComponent },
+  { path: 'authors/:id', component: AuthorComponent, canActivate: [AuthGuard] },
 
-  { path: 'authors/:id/edit', component: FormulaireModifAuthorComponent },
+  { path: 'authors/:id/edit', component: FormulaireModifAuthorComponent, canActivate: [AuthGuard], data: { expectedRole: "ROLE_ADMIN" } },
 
-  { path: 'newAuthor', component: FormulaireAjoutAuthorComponent },
+  { path: 'newAuthor', component: FormulaireAjoutAuthorComponent, canActivate: [AuthGuard], data: { expectedRole: "ROLE_ADMIN" } },
 
-  { path: '**', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
