@@ -47,7 +47,7 @@ class RegisterController extends AbstractController
         ]
     )]
     #[Groups(["getUsers"])]
-    public function register(Request $request, EntityManagerInterface $manager, SerializerInterface $serializer): Response
+    public function register(Request $request, EntityManagerInterface $manager): Response
     {
         $data = json_decode($request->getContent(), true);
         if (empty($data['email']) || empty($data['password'])) {
