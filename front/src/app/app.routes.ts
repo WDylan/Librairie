@@ -16,13 +16,13 @@ import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
 
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
   { path: 'register', component: RegisterComponent },
 
   { path: 'login', component: LoginComponent },
 
   { path: 'logout', component: LoginComponent },
-
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   { path: 'home', component: HomeComponent },
 

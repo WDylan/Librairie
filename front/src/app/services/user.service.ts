@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import User from '../models/user.model';
 import Login from '../models/login.model';
 
 import { Router } from '@angular/router';
@@ -28,6 +27,15 @@ export class UserService {
     return this.loggedIn.asObservable(); // Retourne l'Observable du BehaviorSubject
   }
 
+  // Méthode pour créer un nouvel utilisateur
+  register(userData: any): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/register`, userData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   // Méthode pour se connecter
   login(credentials: Login): Observable<{ token: string }> {
     return this.httpClient.post<{ token: string }>(`${this.apiUrl}/login_check`, credentials).pipe(
@@ -45,30 +53,30 @@ export class UserService {
     this.router.navigate(['/login']); // Redirige vers la page de login
   }
 
-  // Méthode pour obtenir la liste des utilisateurs
-  getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.apiUrl}/users`); // Effectue une requête GET pour obtenir les utilisateurs
-  }
+  // // Méthode pour obtenir la liste des utilisateurs
+  // getUsers(): Observable<User[]> {
+  //   return this.httpClient.get<User[]>(`${this.apiUrl}/users`); // Effectue une requête GET pour obtenir les utilisateurs
+  // }
 
-  // Méthode pour obtenir un utilisateur par son ID
-  getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.apiUrl}/users/${id}`); // Effectue une requête GET pour obtenir un utilisateur spécifique
-  }
+  // // Méthode pour obtenir un utilisateur par son ID
+  // getUser(id: number): Observable<User> {
+  //   return this.httpClient.get<User>(`${this.apiUrl}/users/${id}`); // Effectue une requête GET pour obtenir un utilisateur spécifique
+  // }
 
-  // Méthode pour créer un nouvel utilisateur
-  createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.apiUrl}/users`, user); // Effectue une requête POST pour créer un utilisateur
-  }
+  // // Méthode pour créer un nouvel utilisateur
+  // createUser(user: User): Observable<User> {
+  //   return this.httpClient.post<User>(`${this.apiUrl}/users`, user); // Effectue une requête POST pour créer un utilisateur
+  // }
 
-  // Méthode pour mettre à jour un utilisateur
-  updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.apiUrl}/users/${user.id}`, user); // Effectue une requête PUT pour mettre à jour un utilisateur
-  }
+  // // Méthode pour mettre à jour un utilisateur
+  // updateUser(user: User): Observable<User> {
+  //   return this.httpClient.put<User>(`${this.apiUrl}/users/${user.id}`, user); // Effectue une requête PUT pour mettre à jour un utilisateur
+  // }
 
-  // Méthode pour supprimer un utilisateur
-  deleteUser(id: number): Observable<User> {
-    return this.httpClient.delete<User>(`${this.apiUrl}/users/${id}`); // Effectue une requête DELETE pour supprimer un utilisateur
-  }
+  // // Méthode pour supprimer un utilisateur
+  // deleteUser(id: number): Observable<User> {
+  //   return this.httpClient.delete<User>(`${this.apiUrl}/users/${id}`); // Effectue une requête DELETE pour supprimer un utilisateur
+  // }
 
   // Méthode pour obtenir le rôle de l'utilisateur
   getRole(): string | null {

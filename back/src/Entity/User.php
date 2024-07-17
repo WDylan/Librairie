@@ -6,6 +6,39 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation\Groups;
+
+/**
+ * @Hateoas\Relation(
+ *     "self",
+ *     href = @Hateoas\Route(
+ *         "detailUser",
+ *         parameters = { "id" = "expr(object.getId())" },
+ *     ),
+ *     exclusion = @Hateoas\Exclusion(groups = "getUsers"),
+ * )
+ * 
+ * @Hateoas\Relation(
+ *    "delete",
+ *   href = @Hateoas\Route(
+ *      "deleteUser",
+ *     parameters = { "id" = "expr(object.getId())" },
+ *     ),
+ *     exclusion = @Hateoas\Exclusion(groups = "getUsers", excludeIf = "expr(not is_granted('ROLE_ADMIN'))"),
+ * )
+ * 
+ * @Hateoas\Relation(
+ *    "update",
+ *   href = @Hateoas\Route(
+ *      "updateUser",
+ *     parameters = { "id" = "expr(object.getId())" },
+ *     ),
+ *     exclusion = @Hateoas\Exclusion(groups = "getUsers", excludeIf = "expr(not is_granted('ROLE_ADMIN'))"),
+ * )
+ * 
+ */
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -14,15 +47,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getUsers"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(["getUsers"])]
+    #[Assert\NotBlank(message: "L'email est obligatoire.")]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(["getUsers"])]
     private array $roles = [];
 
     private ?string $plainPassword = null;
@@ -31,6 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(["getUsers"])]
     private ?string $password = null;
 
     public function getId(): ?int

@@ -53,6 +53,4 @@ export class BooksComponent implements OnInit {
       this.loadBooks(); // Recharge les livres pour la nouvelle page
     }
   }
-
-
 }

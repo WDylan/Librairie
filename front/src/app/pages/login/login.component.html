@@ -1,8 +1,9 @@
 <h2>Connexion</h2>
 <form (ngSubmit)="login()">
-  <div>
-    <label for="username">Username:</label>
+  <div class="form-group">
+    <label for="username">Email :</label>
     <input
+      class="form-control"
       type="text"
       id="username"
       [(ngModel)]="credentials.username"
@@ -10,9 +11,10 @@
       required
     />
   </div>
-  <div>
-    <label for="password">Password:</label>
+  <div class="form-group">
+    <label for="password">Mot de passe :</label>
     <input
+      class="form-control"
       type="password"
       id="password"
       [(ngModel)]="credentials.password"
@@ -20,5 +22,5 @@
       required
     />
   </div>
-  <button type="submit">Login</button>
+  <button class="btn btn-primary" type="submit">Login</button>
 </form>
