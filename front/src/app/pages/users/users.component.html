@@ -1,0 +1,10 @@
+<h2>Liste des Utilisateurs</h2>
+<div>
+  <app-user-list [users]="users"></app-user-list>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{currentPage}} of {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>
+
