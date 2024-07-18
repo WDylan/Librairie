@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { UserService } from './services/user.service'; // Importer UserService
+import { AuthService } from './services/auth.service'; // Importer UserService
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  // Constructeur du guard, injecte UserService et Router
-  constructor(private userService: UserService, private router: Router) { }
+  // Constructeur du guard, injecte AuthService et Router
+  constructor(private authService: AuthService, private router: Router) { }
 
   // Méthode canActivate, vérifie si la route peut être activée
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const expectedRole = route.data['expectedRole']; // Rôle attendu pour accéder à la route
-    const currentRole = this.userService.getRole(); // Rôle actuel de l'utilisateur
+    const currentRole = this.authService.getRole(); // Rôle actuel de l'utilisateur
 
     // Vérifie si l'utilisateur est connecté
-    if (!this.userService.isLoggedIn()) {
+    if (!this.authService.isLoggedIn()) {
       this.router.navigate(['login']); // Redirige vers la page de login si non connecté
       return false; // Empêche l'activation de la route
     }

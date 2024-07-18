@@ -1,4 +1,4 @@
-import { UserService } from './../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,10 +17,10 @@ export class RegisterComponent {
   submitted: boolean = false; // Indicateur de soumission du formulaire
 
   // Constructeur avec injection des services nécessaires
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
     this.user = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]], // Ajoutez Validators.email pour valider l'email
-      password: ['', [Validators.required]]
+      username: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g)]], // Ajoutez Validators.email pour valider l'email
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g)]]
     });
   }
 
@@ -30,7 +30,7 @@ export class RegisterComponent {
       email: this.user.value.username, // Changez 'username' en 'email'
       password: this.user.value.password
     };
-    this.userService.register(userData).subscribe({
+    this.authService.register(userData).subscribe({
       next: () => {
         alert("Inscription effectuée avec succès !");
         this.user.reset();

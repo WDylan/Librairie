@@ -1,4 +1,4 @@
-import { UserService } from './../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
 import { CommonModule, SlicePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -16,12 +16,12 @@ export class BookCardComponent {
 
   role: string | null = null; // Propriété pour stocker le rôle de l'utilisateur
 
-  // Constructeur du composant, injecte UserService
-  constructor(private userService: UserService) { }
+  // Constructeur du composant, injecte AuthService
+  constructor(private authService: AuthService) { }
 
   // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
-    // Récupère le rôle de l'utilisateur depuis le UserService
-    this.role = this.userService.getRole();
+    // Récupère le rôle de l'utilisateur depuis le AuthService
+    this.role = this.authService.getRole();
   }
 }

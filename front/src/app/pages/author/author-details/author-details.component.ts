@@ -3,7 +3,7 @@ import Author from '../../../models/author.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthorService } from '../../../services/author.service';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-author-details',
@@ -18,19 +18,19 @@ export class AuthorDetailsComponent {
 
   role: string | null = null; // Propriété pour stocker le rôle de l'utilisateur
 
-  // Constructeur du composant, injecte Router, ActivatedRoute, AuthorService et UserService
+  // Constructeur du composant, injecte Router, ActivatedRoute, AuthorService et AuthService
   constructor(private router: Router,
     private route: ActivatedRoute,
     private authorService: AuthorService,
-    private userService: UserService) {
+    private authService: AuthService) {
     // Récupère l'ID de l'auteur depuis les paramètres de la route et le convertit en nombre
     this.authorId = +this.route.snapshot.paramMap.get('id')!;
   }
 
   // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
-    // Récupère le rôle de l'utilisateur depuis le UserService
-    this.role = this.userService.getRole();
+    // Récupère le rôle de l'utilisateur depuis le AuthService
+    this.role = this.authService.getRole();
   }
 
   // Méthode pour confirmer la suppression de l'auteur

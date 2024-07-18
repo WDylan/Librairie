@@ -3,8 +3,7 @@ import { Component, Input } from '@angular/core';
 import Book from '../../../../models/book.model';
 import { BookService } from '../../../../services/book.service';
 import { CommonModule } from '@angular/common';
-import User from '../../../../models/user.model';
-import { UserService } from '../../../../services/user.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-book-details',
@@ -18,19 +17,19 @@ export class BookDetailsComponent {
   @Input() book: Book | undefined; // Propriété d'entrée pour recevoir les détails du livre
   role: string | null = null; // Propriété pour stocker le rôle de l'utilisateur
 
-  // Constructeur du composant, injecte Router, ActivatedRoute, BookService et UserService
+  // Constructeur du composant, injecte Router, ActivatedRoute, BookService et AuthService
   constructor(private router: Router,
     private route: ActivatedRoute,
     private bookService: BookService,
-    private userService: UserService) {
+    private authService: AuthService) {
     // Récupère l'ID du livre depuis les paramètres de la route et le convertit en nombre
     this.bookId = +this.route.snapshot.paramMap.get('id')!;
   }
 
   // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
-    // Récupère le rôle de l'utilisateur depuis le UserService
-    this.role = this.userService.getRole();
+    // Récupère le rôle de l'utilisateur depuis le AuthService
+    this.role = this.authService.getRole();
   }
 
   // Méthode pour confirmer la suppression du livre

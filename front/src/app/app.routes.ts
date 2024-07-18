@@ -13,6 +13,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './auth.guard';
+import { CompteComponent } from './pages/compte/compte.component';
 
 export const routes: Routes = [
 
@@ -41,6 +42,8 @@ export const routes: Routes = [
   { path: 'authors/:id/edit', component: FormulaireModifAuthorComponent, canActivate: [AuthGuard], data: { expectedRole: "ROLE_ADMIN" } },
 
   { path: 'newAuthor', component: FormulaireAjoutAuthorComponent, canActivate: [AuthGuard], data: { expectedRole: "ROLE_ADMIN" } },
+
+  { path: 'compte', component: CompteComponent, canActivate: [AuthGuard] },
 
   { path: '**', component: NotFoundComponent, canActivate: [AuthGuard] },
 ];
