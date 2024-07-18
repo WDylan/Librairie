@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
         headers: req.headers.set('Authorization', `Bearer ${token}`) // Ajout du token dans les en-têtes de la requête
       });
       return next.handle(cloned); // Passe la requête clonée avec le token
-    } else { // Sinon
+    } else {
       return next.handle(req); // Passe la requête originale sans modification
     }
   }
